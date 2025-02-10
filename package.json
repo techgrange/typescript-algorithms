@@ -1,12 +1,54 @@
 {
   "name": "typescript-algorithms",
   "version": "1.0.0",
-  "description": "",
+  "description": "Comprehensive implementations of algorithms, data structures, and coding patterns in TypeScript, with detailed explanations and real-world examples.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "packageManager": "pnpm@10.2.1",
+  "engines": {
+    "node": ">=22.1.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "test": "jest",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write src",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "algorithms",
+    "data-structures",
+    "coding-patterns",
+    "typescript",
+    "typescript-algorithms",
+    "typescript-data-structures",
+    "typescript-coding-patterns"
+  ],
+  "author": "Amine Azizi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techgrange/typescript-algorithms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/techgrange/typescript-algorithms/issues"
+  },
+  "homepage": "https://github.com/techgrange/typescript-algorithms#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/jest": "^29.5.14",
+    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@typescript-eslint/parser": "^8.23.0",
+    "eslint": "^9.20.0",
+    "eslint-config-prettier": "^10.0.1",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "prettier": "^3.4.2",
+    "ts-jest": "^29.2.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0"
+  }
 }
