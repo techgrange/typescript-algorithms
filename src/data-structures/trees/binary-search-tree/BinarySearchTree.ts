@@ -8,7 +8,7 @@ export class BinarySearchTree<NodeValue_Type> {
   }
 
   insert(value: NodeValue_Type) {
-    const newNode = new BSNode(value);
+    const newNode = new BSNode<NodeValue_Type>(value);
 
     if (this.root === null) {
       this.root = newNode;
