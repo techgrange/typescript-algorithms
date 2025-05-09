@@ -91,4 +91,99 @@ export class BinarySearchTree<NodeValue_Type> {
     return this.findMinNode(node.left);
   }
 
+  breadthFirstSearch(): Set<BSNode<NodeValue_Type>> {
+    if (this.root === null) {
+      return new Set();
+    }
+
+    const queue: BSNode<NodeValue_Type>[] = [];
+    const visited: Set<BSNode<NodeValue_Type>> = new Set();
+
+    queue.push(this.root);
+
+    while (queue.length > 0) {
+      const currentNode = queue.shift();
+
+      if (currentNode) {
+        visited.add(currentNode);
+        if (currentNode.left) {
+          queue.push(currentNode.left);
+        }
+        if (currentNode.right) {
+          queue.push(currentNode.right);
+        }
+      }
+    }
+
+    return visited;
+  }
+
+  depthFirstSearchPreOrder(): Set<BSNode<NodeValue_Type>> {
+    const visited: Set<BSNode<NodeValue_Type>> = new Set();
+
+    this.depthFirstSearchPreOrderNode(this.root, visited);
+
+    return visited;
+  }
+
+  depthFirstSearchPreOrderNode(node: BSNode<NodeValue_Type> | null, visited: Set<BSNode<NodeValue_Type>>) {
+    if (node === null) {
+      return;
+    }
+
+    visited.add(node);
+    if (node.left) {
+      this.depthFirstSearchPreOrderNode(node.left, visited);
+    }
+    if (node.right) {
+      this.depthFirstSearchPreOrderNode(node.right, visited);
+    }
+  }
+
+  depthFirstSearchPostOrder(): Set<BSNode<NodeValue_Type>> {
+    const visited: Set<BSNode<NodeValue_Type>> = new Set();
+
+    this.depthFirstSearchPostOrderNode(this.root, visited);
+
+    return visited;
+  }
+
+  depthFirstSearchPostOrderNode(node: BSNode<NodeValue_Type> | null, visited: Set<BSNode<NodeValue_Type>>) {
+    if (node === null) {
+      return;
+    }
+
+    if (node.left) {
+      this.depthFirstSearchPostOrderNode(node.left, visited);
+    }
+    if (node.right) {
+      this.depthFirstSearchPostOrderNode(node.right, visited);
+    }
+
+    visited.add(node);
+  }
+
+  depthFirstSearchInOrder(): Set<BSNode<NodeValue_Type>> {
+    const visited: Set<BSNode<NodeValue_Type>> = new Set();
+
+    this.depthFirstSearchInOrderNode(this.root, visited);
+
+    return visited;
+  }
+
+  depthFirstSearchInOrderNode(node: BSNode<NodeValue_Type> | null, visited: Set<BSNode<NodeValue_Type>>) {
+    if (node === null) {
+      return;
+    }
+
+    if (node.left) {
+      this.depthFirstSearchInOrderNode(node.left, visited);
+    }
+
+    visited.add(node);
+
+    if (node.right) {
+      this.depthFirstSearchInOrderNode(node.right, visited);
+    }
+  }
 }
