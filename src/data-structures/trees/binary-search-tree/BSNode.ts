@@ -8,4 +8,5 @@ export class BSNode<NodeValue_Type> {
     this.left = null;
     this.right = null;
   }
+
 }
