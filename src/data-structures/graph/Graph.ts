@@ -81,20 +81,31 @@ export class Graph<GraphVertex extends string | number | symbol> {
     const visited: Record<GraphVertex, boolean> = {} as Record<GraphVertex, boolean>;
     const adjacencyList = this.adjacencyList;
 
-    (function bfs(queue: GraphVertex[]) {
-      if (!queue.length) return null;
+    // Mark the start vertex as visited immediately
+    visited[start] = true;
+    result.push(start);
 
-      const vertex = queue.shift();
-      if (!vertex) return null;
+    (function bfs(vertices: GraphVertex[]) {
+      if (!vertices.length) return;
 
-      visited[vertex] = true;
-      result.push(vertex);
+      const nextLevel: GraphVertex[] = [];
 
-      adjacencyList[vertex].forEach((neighbor) => {
-        if (!visited[neighbor]) {
-          return bfs([neighbor]);
-        }
-      });
+      // Process all vertices at the current level
+      for (const vertex of vertices) {
+        // Add all unvisited neighbors to the next level
+        adjacencyList[vertex].forEach((neighbor) => {
+          if (!visited[neighbor]) {
+            visited[neighbor] = true;
+            result.push(neighbor);
+            nextLevel.push(neighbor);
+          }
+        });
+      }
+
+      // Recursively process the next level
+      if (nextLevel.length) {
+        bfs(nextLevel);
+      }
     })([start]);
 
     return result;
