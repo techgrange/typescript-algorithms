@@ -83,16 +83,43 @@ export class Graph<GraphVertex extends string | number | symbol> {
 
     (function bfs(queue: GraphVertex[]) {
       if (!queue.length) return null;
+
       const vertex = queue.shift();
       if (!vertex) return null;
+
       visited[vertex] = true;
       result.push(vertex);
+
       adjacencyList[vertex].forEach((neighbor) => {
         if (!visited[neighbor]) {
           return bfs([neighbor]);
         }
       });
     })([start]);
+
+    return result;
+  }
+
+  // Iterative BFS
+  breadthFirstSearchIterative(start: GraphVertex) {
+    const result: GraphVertex[] = [];
+    const visited: Record<GraphVertex, boolean> = {} as Record<GraphVertex, boolean>;
+    const adjacencyList = this.adjacencyList;
+    const queue: GraphVertex[] = [start];
+
+    while (queue.length) {
+      const vertex = queue.shift();
+      if (!vertex) continue;
+
+      visited[vertex] = true;
+      result.push(vertex);
+
+      adjacencyList[vertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          queue.push(neighbor);
+        }
+      });
+    }
 
     return result;
   }
