@@ -117,16 +117,17 @@ export class Graph<GraphVertex extends string | number | symbol> {
     const visited: Record<GraphVertex, boolean> = {} as Record<GraphVertex, boolean>;
     const adjacencyList = this.adjacencyList;
     const queue: GraphVertex[] = [start];
+    visited[start] = true;
 
     while (queue.length) {
       const vertex = queue.shift();
       if (!vertex) continue;
 
-      visited[vertex] = true;
       result.push(vertex);
 
       adjacencyList[vertex].forEach((neighbor) => {
         if (!visited[neighbor]) {
+          visited[neighbor] = true;
           queue.push(neighbor);
         }
       });
