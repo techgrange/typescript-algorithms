@@ -34,15 +34,19 @@ export class Graph<GraphVertex extends string | number | symbol> {
     const visited: Record<GraphVertex, boolean> = {} as Record<GraphVertex, boolean>;
     const adjacencyList = this.adjacencyList;
 
+    // Recursive DFS using a helper function
     (function dfs(vertex: GraphVertex) {
       if (!vertex) return null;
+
       visited[vertex] = true;
       result.push(vertex);
+
       adjacencyList[vertex].forEach((neighbor) => {
-        if (!visited[neighbor as unknown as GraphVertex]) {
-          return dfs(neighbor as unknown as GraphVertex);
+        if (!visited[neighbor]) {
+          return dfs(neighbor);
         }
       });
+
     })(start);
 
     return result;
@@ -60,8 +64,8 @@ export class Graph<GraphVertex extends string | number | symbol> {
       visited[vertex] = true;
       result.push(vertex);
       adjacencyList[vertex].forEach((neighbor) => {
-        if (!visited[neighbor as unknown as GraphVertex]) {
-          return bfs([neighbor as unknown as GraphVertex]);
+        if (!visited[neighbor]) {
+          return bfs([neighbor]);
         }
       });
     })([start]);
