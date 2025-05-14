@@ -52,6 +52,30 @@ export class Graph<GraphVertex extends string | number | symbol> {
     return result;
   }
 
+  // Iterative DFS
+  depthFirstSearchIterative(start: GraphVertex) {
+    const result: GraphVertex[] = [];
+    const visited: Record<GraphVertex, boolean> = {} as Record<GraphVertex, boolean>;
+    const adjacencyList = this.adjacencyList;
+    const stack: GraphVertex[] = [start];
+
+    while (stack.length) {
+      const vertex = stack.pop();
+      if (!vertex) continue;
+
+      visited[vertex] = true;
+      result.push(vertex);
+
+      adjacencyList[vertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          stack.push(neighbor);
+        }
+      });
+    }
+
+    return result;
+  }
+
   breadthFirstSearch(start: GraphVertex) {
     const result: GraphVertex[] = [];
     const visited: Record<GraphVertex, boolean> = {} as Record<GraphVertex, boolean>;
